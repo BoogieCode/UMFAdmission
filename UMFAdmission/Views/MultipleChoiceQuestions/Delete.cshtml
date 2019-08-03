@@ -1,0 +1,96 @@
+﻿@model UMFAdmission.Models.MultipleChoiceQuestion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MultipleChoiceQuestion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.D)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.D)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerD)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

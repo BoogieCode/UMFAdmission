@@ -1,0 +1,51 @@
+﻿@model List<UMFAdmission.Models.TestViewModel>
+
+
+
+
+<table class="table">
+   
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                QUESTION
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question)
+            </td>
+        </tr>
+        <tr>
+            <td id="A"
+                style='color: @(item.A == true ? (item.CheckA==true? "green":"purple") :(item.CheckA==true? "red":"black"));'>
+                @Html.DisplayFor(modelItem => item.AnswerA)
+            </td>
+            
+            <td id="B"
+               style='color: @(item.B == true ? (item.CheckB==true? "green":"purple") :(item.CheckB==true? "red":"black"));'>
+
+                @Html.DisplayFor(modelItem => item.AnswerB)
+            </td>
+            <td id="C"
+               style='color: @(item.C == true ? (item.CheckC==true? "green":"purple") :(item.CheckC==true? "red":"black"));'>
+
+                @Html.DisplayFor(modelItem => item.AnswerC)
+            </td>
+            <td id="D"
+                style='color: @(item.D == true ? (item.CheckD==true? "green":"purple") :(item.CheckD==true? "red":"black"));'>
+
+                @Html.DisplayFor(modelItem => item.AnswerD)
+            </td>
+            <td id="E"
+               style='color: @(item.E == true ? (item.CheckE==true? "green":"purple") :(item.CheckE==true? "red":"black"));'>
+
+                @Html.DisplayFor(modelItem => item.AnswerE)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+</script>

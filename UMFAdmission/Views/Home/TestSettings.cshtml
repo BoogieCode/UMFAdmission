@@ -1,0 +1,148 @@
+﻿@model UMFAdmission.Models.TestSettingsViewModel
+
+@{
+    ViewBag.Title = "Test settings";
+}
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<h2>Settings</h2>
+@using (Html.BeginForm())
+{
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.NumberOfQuestions)
+        </th>
+        <th>
+            @Html.TextBoxFor(model => model.NumberOfQuestions)
+            @Html.ValidationMessageFor(model => model.NumberOfQuestions)
+        </th>
+    </tr>
+
+
+    @for (int i = 0; i < Model.Bio.Count; i++)
+    {
+
+        if (i == 0)
+        {
+            <tr>
+                <td>
+                    <label class="container">
+                        <input name="all" onclick="changeAll();" id="all" type="checkbox">
+                        <span class="checkmark"></span>
+                        @Model.Categories[i]
+                    </label>
+
+
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <div class="checkbox">
+                        <label style="font-size: 1em">
+                            <input type="checkbox" class="notall" value="false" id="@i" onclick="updatemyhidden(@i);">
+                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                            @Model.Categories[i]
+                        </label>
+                    </div>
+
+
+                </td>
+            </tr>
+        }
+    }
+
+
+    @*@for (int item = 0; item < Model.Categories.Count; item++)
+        {
+            if (item == 0)
+            {
+                <tr>
+                    <td>
+                        <label class="container">
+                            <input name="all" onclick="changeAll();" id="Bio" type="checkbox">
+                            <span class="checkmark"></span>
+                            @Model.Categories[item]
+                        </label>
+
+
+                    </td>
+                </tr>
+            }
+            else
+            {
+
+
+
+
+                @*<tr>
+                        <td>
+                            <label class="container">
+                                <input class="notall" id="@item" type="checkbox">
+                                <span class="checkmark"></span>
+                                @Model.Categories[item]
+                            </label>
+
+
+                        </td>
+                    </tr>*@
+
+
+
+</table>
+<div>
+    <div>
+        <input type="submit" value="Send" class="btn btn-success" />
+    </div>
+</div>
+}
+<script>
+
+    window.addEventListener("load", function () {
+        init();
+    });
+    function init() {
+        for (var i = 1; i < 13; i++) {
+            document.getElementById(i).checked = false;
+        }
+    }
+
+    function updatemyhidden(i) {
+        if (document.getElementById(i).value === "false") {
+            document.getElementById(i).value = true;
+            document.getElementById(i).checked = true;
+            setModel(i,"true");
+        }
+        else {
+            document.getElementById(i).value = false;
+            document.getElementById(i).checked = false;
+            setModel(i,"false")
+        }
+
+       debugger;
+    }
+
+
+    function setModel(i, set) {
+     
+        debugger;
+        }
+
+
+    function changeAll() {
+
+        var list = document.getElementsByClassName('notall');
+
+        for (i = 0; i < list.length; i++) {
+            var x = document.getElementById('all').checked;
+            debugger;
+
+            list[i].checked = x;
+
+        }
+    }
+</script>

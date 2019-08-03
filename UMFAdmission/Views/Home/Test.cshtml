@@ -1,0 +1,236 @@
+﻿@model List<UMFAdmission.Models.TestViewModel>
+@{
+    ViewBag.Title = "Test";
+}
+
+
+<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed&display=swap" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div id="question">
+
+    </div>
+    <div id="quiz" class="centered grid__col--8">
+        <h1>Test</h1>
+
+    </div>
+    @using (Html.BeginForm())
+    {
+        <table class="table">
+            <tr>
+                <td></td>
+                <td>
+                    Question
+                </td>
+                <td id="Question"></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <br />
+        <table class="table">
+
+            <tr>
+                <th>
+                    <div class="checkbox">
+                        <label style="font-size: 1em">
+                            <input type="checkbox" value="" id="A">
+                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+
+                        </label>
+                    </div>
+                </th>
+                <td id="AnswerA"></td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="checkbox">
+                        <label style="font-size: 1em">
+                            <input type="checkbox" value="" id="B">
+                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+
+                        </label>
+                    </div>
+                </th>
+                <td id="AnswerB"></td>
+            </tr>
+            <tr>
+                <th>
+                    <div class="checkbox">
+                        <label style="font-size: 1em">
+                            <input type="checkbox" value="" id="C">
+                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+
+                        </label>
+                    </div>
+                </th>
+                <td id="AnswerC"></td>
+            </tr>
+            <tr>
+                <th>
+                    <div class="checkbox">
+                        <label style="font-size: 1em">
+                            <input type="checkbox" value="" id="D">
+                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+
+                        </label>
+                    </div>
+
+                </th>
+                <td id="AnswerD"></td>
+                <th></th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="checkbox">
+                        <label style="font-size: 1em">
+                            <input type="checkbox" value="" id="E">
+                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+
+                        </label>
+                    </div>
+
+                </th>
+                <td id="AnswerE"></td>
+                <th></th>
+            </tr>
+        </table>
+
+        <div id="submitQ">
+            <div class="buttonHolder">
+                <input id="hiddenObj" name="data" type="hidden" value="" />
+                <input type="submit" value="Send" class="btn btn-success" />
+            </div>
+        </div>
+    }
+
+    <font color="green">
+        @ViewBag.successMessage
+    </font>
+
+</div>
+
+       
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+    var i = 0;
+    var listObjects = [];
+    var totalCorrects = 0;
+    var m ='@Html.Raw(Json.Encode(Model))';
+
+    var jsonObj = JSON.parse(m);
+
+    window.addEventListener("load", function () {
+        initAnswers();
+    });
+
+    $("#submitQ").click(function (e) {
+        if (i < jsonObj.length-1) {
+            console.log(i);
+            submitAnswer();
+            e.preventDefault();
+        } else {
+            $("#hiddenObj").val(JSON.stringify(listObjects));
+        }
+    });
+
+
+
+
+    var quiz = new quizObj(i);
+
+    function initAnswers() {
+
+
+        document.getElementById("A").checked = false;
+        document.getElementById("B").checked = false;
+        document.getElementById("C").checked = false;
+        document.getElementById("D").checked = false;
+        document.getElementById("E").checked = false;
+
+        document.getElementById("Question").innerHTML = quiz.Question;
+        document.getElementById("AnswerA").innerHTML = quiz.AnswerA;
+        document.getElementById("AnswerB").innerHTML = quiz.AnswerB;
+        document.getElementById("AnswerC").innerHTML = quiz.AnswerC;
+        document.getElementById("AnswerD").innerHTML = quiz.AnswerD;
+        document.getElementById("AnswerE").innerHTML = quiz.AnswerE;
+    }
+
+    function quizObj(i) {
+        var obj = {
+            QuestionID: jsonObj[i].QuestionID,
+            Question: jsonObj[i].Question,
+            A: jsonObj[i].A,
+            B: jsonObj[i].B,
+            C: jsonObj[i].C,
+            D: jsonObj[i].D,
+            E: jsonObj[i].E,
+            AnswerA: jsonObj[i].AnswerA,
+            AnswerB: jsonObj[i].AnswerB,
+            AnswerC: jsonObj[i].AnswerC,
+            AnswerD: jsonObj[i].AnswerD,
+            AnswerE: jsonObj[i].AnswerE,
+            CheckA: jsonObj[i].CheckA,
+            CheckB: jsonObj[i].CheckB,
+            CheckC: jsonObj[i].CheckC,
+            CheckD: jsonObj[i].CheckD,
+            CheckE: jsonObj[i].CheckE
+        };
+        return obj;
+    }
+    
+
+    function submitAnswer() {
+
+        quiz.CheckA= document.getElementById("A").checked;
+        quiz.CheckB = document.getElementById("B").checked;
+        quiz.CheckC = document.getElementById("C").checked;
+        quiz.CheckD = document.getElementById("D").checked;
+        quiz.CheckE = document.getElementById("E").checked;
+        
+        listObjects.push(quiz);
+        //quiz = new quizObj(i);
+
+
+        //if (A == quiz.A &&
+        //    B == quiz.B &&
+        //    C == quiz.C &&
+        //    D == quiz.D &&
+        //    E == quiz.E) {
+        //    totalCorrects++;
+        //    console.log(totalCorrects);
+        //} else {
+        //    listObjects.push(quiz);
+        //}     
+        initNewQuestion();
+    }
+
+    function initNewQuestion() {
+
+        i++;
+
+        quiz = new quizObj(i);
+
+        document.getElementById("A").checked = false;
+        document.getElementById("B").checked = false;
+        document.getElementById("C").checked = false;
+        document.getElementById("D").checked = false;
+        document.getElementById("E").checked = false;
+
+        document.getElementById("Question").innerHTML = quiz.Question;
+        document.getElementById("AnswerA").innerHTML = quiz.AnswerA;
+        document.getElementById("AnswerB").innerHTML = quiz.AnswerB;
+        document.getElementById("AnswerC").innerHTML = quiz.AnswerC;
+        document.getElementById("AnswerD").innerHTML = quiz.AnswerD;
+        document.getElementById("AnswerE").innerHTML = quiz.AnswerE;
+
+    }
+
+</script>
